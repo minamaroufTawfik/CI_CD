@@ -24,7 +24,7 @@ jobs:
         - run:
             name: "echo an echo variable that is a part of our project"
             command:
-              echo ${My_Name}
+              echo $My_Name
 workflows:
   # Name the workflow "welcome"
   welcome:
