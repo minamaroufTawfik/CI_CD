@@ -10,6 +10,15 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 # Orchestrate or schedule a set of jobs
 jobs:
+  testFailedJon:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: exit 1
+      - run:
+          name: On Error
+          command: echo "Hello Error!"
+          when: on_fail
   testUseCommand:
     docker:
       - image: circleci/node:13.8.0
