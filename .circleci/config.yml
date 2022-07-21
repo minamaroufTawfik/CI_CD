@@ -84,14 +84,18 @@ jobs:
         - run: apk add --update curl
         - run:
             name: smoke test
-            command: |
-              URL="https://blog.udacity.com/"
-              if curl -s --head ${URL}
-              then
-                return 0
-              else
-                return 1
-              fi
+            # command: |
+            #   URL="https://blog.udacity.com/"
+            #   if curl -s --head ${URL}
+            #   then
+            #     return 0
+            #   else
+            #     return 1
+            #   fi
+            
+            # Fail the job intentionally to simulate an error.
+            command:  return 1
+        - destroy_environment
             
 
 workflows:
@@ -101,6 +105,8 @@ workflows:
     jobs:
       # - welcome/run
       - print_greetings
-      - smoke_test
-      # - create_infrastructure
+      - create_infrastructure
       # - configure_infrastructure
+      - smoke_test:
+          requires:
+            - create_infrastructure
